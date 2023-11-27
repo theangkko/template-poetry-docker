@@ -1,3 +1,15 @@
+# virtual environment
+venv/
+.venv/
+
+# user
+.vscode/
+
+# created when running build_pyinstaller
+*.spec
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
