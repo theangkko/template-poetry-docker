@@ -25,3 +25,21 @@ curl -sSL https://install.python-poetry.org | python3 -
 ```
 poetry self update
 ```
+
+
+## How to use
+```
+poetry config virtualenvs.in-project true
+
+
+poetry install
+
+# Installing dependencies only
+poetry install --no-root
+
+# for venv environment
+poetry shell
+
+# run temporary
+poetry run python main.py
+```
