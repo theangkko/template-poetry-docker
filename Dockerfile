@@ -4,7 +4,6 @@
 # WORKDIR /app
 # COPY requirements.txt ./
 
-
 # RUN apt-get update && apt-get install -y sudo
 # RUN chmod +w /etc/sudoers
 # RUN echo 'user ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers
@@ -36,9 +35,17 @@ RUN pip install "poetry==$POETRY_VERSION"
 WORKDIR /app
 COPY poetry.lock pyproject.toml /app/
 
+
 # Project initialization:
 RUN poetry config virtualenvs.create false \
   && poetry install $(test "$YOUR_ENV" == production && echo "--no-dev") --no-interaction --no-ansi
+
+
+# Creates a non-root user with an explicit UID and adds permission to access the /app folder
+# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
+# RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+# USER appuser
+
 
 # Creating folders, and files for a project:
 COPY /src/. /app
